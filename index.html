@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Новогодний фуршет Preparty</title>
+<meta name="description" content="Новогодний фуршет Preparty: меню с сетами New Year, смета с пересчётом на гостя.">
+<meta property="og:title" content="Новогодний фуршет Preparty">
+<meta property="og:description" content="Готовая смета на новогодний корпоратив: меню, обслуживание, логистика.">
+<meta property="og:type" content="website">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+:root{
+  --ground:#FBF6EC;
+  --paper:#FFFDF8;
+  --ink:#242424;
+  --ink-soft:#6B6459;
+  --gold:#B09E7A;
+  --gold-bright:#D7BE86;
+  --gold-dim:#EADFC9;
+  --red:#B3232F;
+  --red-deep:#8E1A26;
+  --red-soft:#FBE8E7;
+  --green:#1E5138;
+  --green-bright:#2E7A52;
+  --green-soft:#E3EFE6;
+  --frost:#CBDCE8;
+  --line:#E9DFCD;
+  --shadow:0 1px 2px rgba(36,36,36,.05), 0 10px 28px rgba(36,36,36,.07);
+  --f-display:"Montserrat", "Trebuchet MS", sans-serif;
+  --f-body:"Manrope", -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 420px at 88% -60px, rgba(46,122,82,.10), transparent 70%),
+    radial-gradient(760px 380px at 4% 6%, rgba(179,35,47,.09), transparent 70%),
+    var(--ground);
+}
+#snow{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:2}
+.wrap{max-width:960px; margin:0 auto; padding-inline:16px; position:relative; z-index:3}
+
+/* ===== шапка + гирлянда ===== */
+.top{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:rgba(251,246,236,.94); backdrop-filter:blur(8px);
+  border-bottom:3px solid transparent;
+  border-image:linear-gradient(90deg, var(--red) 0 33%, var(--gold-bright) 33% 66%, var(--green) 66% 100%) 1;
+}
+.top-r{display:flex; align-items:center; gap:10px}
+.top-in{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:12px}
+.top img.logo{width:150px; height:auto; display:block}
+.ghost{
+  font:600 11px/1 var(--f-body); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--green); background:var(--green-soft); border:1px solid var(--green);
+  border-radius:999px; padding:9px 14px; cursor:pointer;
+}
+.ghost:hover{background:var(--green); color:#fff}
+.ghost:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+
+.garland{position:relative; height:34px; overflow:hidden; z-index:19; pointer-events:none}
+.garland svg{position:absolute; inset:0; width:100%; height:100%}
+.bulb{transform-origin:center; animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ===== герой ===== */
+.hero{
+  position:relative; margin-top:18px; padding:34px 28px 28px; border-radius:24px; overflow:hidden;
+  background:
+    radial-gradient(420px 260px at 100% 0, rgba(46,122,82,.14), transparent 70%),
+    radial-gradient(360px 240px at 0 100%, rgba(179,35,47,.10), transparent 70%),
+    var(--paper);
+  border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.hero::before{content:""; position:absolute; inset:0 0 auto 0; height:6px; background:repeating-linear-gradient(90deg,var(--red) 0 24px,var(--paper) 24px 30px,var(--green) 30px 54px,var(--paper) 54px 60px)}
+.hero .mono{position:absolute; left:-30px; bottom:-30px; width:190px; opacity:.10; pointer-events:none}
+.hero .eyebrow, .hero h1, .hero .lead, .hero .guests{position:relative; z-index:1}
+.deco{position:absolute; pointer-events:none; z-index:0}
+.deco.tree{right:6px; top:58px; width:168px; filter:drop-shadow(0 10px 14px rgba(30,81,56,.22))}
+.deco.tree2{right:150px; top:118px; width:96px; filter:drop-shadow(0 8px 12px rgba(30,81,56,.18))}
+.deco.gift1{right:118px; top:250px; width:74px; transform:rotate(-6deg); filter:drop-shadow(0 6px 10px rgba(36,36,36,.18))}
+.deco.gift2{right:6px; top:266px; width:58px; transform:rotate(7deg); filter:drop-shadow(0 6px 10px rgba(36,36,36,.18))}
+.deco.gift3{right:66px; top:286px; width:44px; filter:drop-shadow(0 5px 8px rgba(36,36,36,.16))}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font:700 11px/1 var(--f-body); letter-spacing:.2em; text-transform:uppercase;
+  color:#fff; background:var(--red); border-radius:999px; padding:8px 14px; margin:0 0 16px;
+}
+h1{
+  font-family:var(--f-display); font-weight:800; font-size:clamp(32px,6.6vw,56px);
+  line-height:1.02; letter-spacing:-.022em; margin:0 0 16px; text-wrap:balance; max-width:12ch;
+}
+h1 em{font-style:normal; color:var(--red); display:block}
+h1 .spark{color:var(--red)}
+.lead{max-width:52ch; color:var(--ink-soft); margin:0 0 26px; font-size:16px}
+
+.guests{
+  position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:16px 24px;
+  background:#fff; border:1.5px solid var(--green); border-radius:16px; max-width:520px;
+  padding:18px 20px; box-shadow:var(--shadow);
+}
+.guests .lab{font:700 11px/1.4 var(--f-body); letter-spacing:.16em; text-transform:uppercase; color:var(--green)}
+.guests .hint{flex:1 1 100%; margin:0; font-size:12.5px; color:var(--ink-soft); max-width:60ch}
+.guests .yield{font-size:13px; color:var(--ink-soft)}
+.guests .yield b{color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums}
+
+.stepper{display:inline-flex; align-items:center; gap:2px}
+.stepper button{
+  width:34px; height:34px; border-radius:9px; border:1px solid var(--line);
+  background:var(--ground); color:var(--ink); font-size:17px; line-height:1; cursor:pointer;
+  display:grid; place-items:center;
+}
+.stepper button:hover{border-color:var(--red); color:var(--red); background:#fff}
+.stepper input{
+  width:58px; height:34px; text-align:center; font:700 15px var(--f-body);
+  border:1px solid var(--line); border-radius:9px; background:#fff; color:var(--ink);
+  font-variant-numeric:tabular-nums; margin-inline:4px;
+}
+
+/* ===== заголовки блоков ===== */
+.block-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  margin:44px 0 0; padding:12px 18px; border-radius:14px;
+  background:var(--green-soft); color:var(--green); border:1px solid rgba(30,81,56,.25); border-left:6px solid var(--red);
+}
+.block-head h2{
+  font-family:var(--f-display); font-weight:800; font-size:21px; letter-spacing:-.01em;
+  margin:0; display:flex; align-items:center; gap:10px;
+}
+.block-head span{font:600 11px/1 var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:var(--red)}
+
+.example{
+  margin:14px 0 0; padding:12px 16px; border-radius:12px; background:var(--red-soft);
+  border:1px solid rgba(179,35,47,.35); color:var(--red-deep); font-size:14px;
+}
+.cat{margin-top:26px}
+.cat-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding-bottom:9px; border-bottom:2px dotted rgba(179,35,47,.55);
+}
+.cat-head h3{
+  font:700 12px/1 var(--f-body); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--red); margin:0; display:flex; align-items:center; gap:8px;
+}
+.cat-head h3::before{content:""; width:14px; height:14px; background:url(assets/star.svg) center/contain no-repeat}
+.cat-head .sum{font-size:12px; color:var(--green); font-weight:600; letter-spacing:.04em; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+/* ===== позиции ===== */
+.item{
+  display:grid; gap:14px 18px; padding:18px 14px; border-bottom:1px solid var(--line);
+  grid-template-columns:96px minmax(0,1fr) auto; align-items:start; border-radius:12px;
+}
+.item:hover{background:var(--paper)}
+.item.ny{background:linear-gradient(180deg, rgba(227,239,230,.75), rgba(255,253,248,.55)); border:1px solid var(--green); margin-block:6px}
+.item.off{opacity:.4}
+.item img{width:96px; height:96px; object-fit:cover; border-radius:12px; display:block; background:var(--gold-dim)}
+.item h4{font-size:16px; font-weight:700; margin:0 0 6px; line-height:1.3}
+.nyflag{
+  display:inline-block; vertical-align:2px; margin-left:8px;
+  font:700 9px/1 var(--f-body); letter-spacing:.14em; text-transform:uppercase;
+  color:#fff; background:var(--red); border-radius:999px; padding:5px 9px;
+}
+.item p{margin:0; font-size:13px; color:var(--ink-soft); line-height:1.5}
+.ctrl{display:flex; flex-direction:column; align-items:flex-end; gap:6px; min-width:150px}
+.ctrl .sum{display:flex; flex-direction:column; align-items:flex-end; gap:2px; min-width:0}
+.ctrl .meta{font-size:12px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.ctrl .price{font:800 18px/1 var(--f-display); color:var(--red); font-variant-numeric:tabular-nums; white-space:nowrap}
+.ctrl .unit{font-size:11px; color:var(--ink-soft); letter-spacing:.04em; white-space:nowrap}
+
+/* ===== подарок ===== */
+.gift{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  margin-top:26px; padding:20px 22px; border-radius:16px;
+  background:var(--red); color:#fff; box-shadow:var(--shadow); outline:1px dashed rgba(215,190,134,.8); outline-offset:-8px;
+}
+.gift img.giftimg{flex:none; width:96px; height:96px; object-fit:cover; border-radius:14px; border:2px solid var(--gold-bright)}
+.gift .txt{flex:1 1 260px; min-width:0}
+.gift .giftlist{margin:8px 0 0; padding:0; list-style:none; font-size:12px; line-height:1.5; color:#F6DCDA}
+.gift .giftlist li{margin:0}
+.gift .giftstate{margin-top:10px; font-weight:700; color:var(--gold-bright); font-size:13.5px}
+.gift.on{background:var(--green)}
+.gift h3{font-family:var(--f-display); font-weight:800; font-size:19px; margin:0 0 6px}
+.gift p{margin:0; font-size:13.5px; color:#F6DCDA}
+
+/* ===== доп услуги ===== */
+.extra{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 18px;
+  padding:16px 0; border-bottom:1px solid var(--line);
+}
+.extra.off{opacity:.4}
+.extra .txt{flex:1 1 240px; min-width:0}
+.extra h4{font-size:15px; font-weight:700; margin:0 0 3px}
+.extra p{margin:0; font-size:12.5px; color:var(--ink-soft)}
+.extra .right{display:grid; grid-template-columns:140px 104px 100px; align-items:center; gap:14px}
+.extra .price{font:800 16px/1 var(--f-display); color:var(--red); text-align:right; font-variant-numeric:tabular-nums}
+.extra .toggle{width:100%; text-align:center}
+.extra .stepper input{width:58px}
+.toggle{
+  font:700 10px/1 var(--f-body); letter-spacing:.12em; text-transform:uppercase;
+  border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+  border-radius:999px; padding:8px 12px; cursor:pointer;
+}
+.toggle[aria-pressed="true"]{background:var(--green); border-color:var(--green); color:#fff}
+
+/* ===== итог ===== */
+.total-card{
+  position:relative; margin-top:34px; border-radius:20px; padding:30px 24px 26px;
+  background:#fff; border:1.5px solid var(--green); color:var(--ink); box-shadow:var(--shadow); overflow:hidden;
+}
+.total-card::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:8px;
+  background:repeating-linear-gradient(90deg, var(--red) 0 28px, var(--green) 28px 56px);
+}
+.total-card .row{
+  display:flex; justify-content:space-between; gap:16px; padding:9px 0; border-bottom:1px dotted var(--line);
+  font-size:14px; color:var(--ink-soft); font-variant-numeric:tabular-nums;
+}
+.total-card .row b{color:var(--ink); font-weight:700}
+.total-card .grand{
+  display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px;
+  margin-top:14px; padding-top:18px;
+}
+.total-card .grand span{font:700 11px/1 var(--f-body); letter-spacing:.2em; text-transform:uppercase; color:var(--green)}
+.total-card .grand strong{font-family:var(--f-display); font-weight:800; font-size:clamp(30px,6vw,46px); line-height:1; color:var(--red); font-variant-numeric:tabular-nums}
+.total-card .per{margin-top:10px; font-size:14px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.total-card .per b{color:var(--green); font-weight:800}
+.total-card .valid{margin:14px 0 0; padding-top:12px; border-top:1px dotted var(--line); font-size:12.5px; color:var(--ink-soft)}
+.total-card .valid b{color:var(--red)}
+
+.cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px}
+.btn{
+  font:700 12px/1 var(--f-body); letter-spacing:.14em; text-transform:uppercase;
+  border-radius:999px; padding:16px 28px; cursor:pointer; border:2px solid transparent;
+}
+.btn-primary{background:var(--red); color:#fff}
+.btn-primary:hover{background:var(--red-deep)}
+.btn-outline{background:transparent; border-color:var(--green); color:var(--green)}
+.btn-outline:hover{background:var(--green-soft)}
+
+.contact{
+  display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:34px; padding:22px 24px;
+  background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow);
+}
+.contact img.mgr{width:112px; height:112px; border-radius:50%; object-fit:cover; border:3px solid var(--gold-bright); flex:none}
+.contact .mbody{flex:1 1 280px; min-width:0}
+.contact .mlab{margin:0 0 4px; font:700 11px/1.4 var(--f-body); letter-spacing:.16em; text-transform:uppercase; color:var(--green)}
+.contact .mtxt{margin:0 0 14px; font-size:14px; color:var(--ink-soft); max-width:46ch}
+.contact .mlinks{display:flex; flex-wrap:wrap; gap:10px}
+a.btn.mail{text-transform:none; letter-spacing:.02em; font-size:13px}
+a.btn{display:inline-block; text-decoration:none; text-align:center; font-size:12px; letter-spacing:.08em}
+.callbtn{
+  font:700 12px/1 var(--f-body); letter-spacing:.06em; text-decoration:none; color:var(--red);
+  border:1.5px solid var(--red); border-radius:999px; padding:9px 14px; white-space:nowrap; font-variant-numeric:tabular-nums;
+}
+.callbtn:hover{background:var(--red); color:#fff}
+footer{margin:44px 0 120px; padding-top:24px; border-top:2px dotted var(--gold); color:var(--ink-soft); font-size:12.5px}
+footer p{margin:0 0 6px}
+
+/* ===== нижняя панель ===== */
+.bar{
+  position:fixed; left:0; right:0; bottom:0; z-index:30;
+  background:rgba(255,253,248,.96); backdrop-filter:blur(8px); color:var(--ink);
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top:3px solid var(--red); box-shadow:0 -8px 24px rgba(36,36,36,.08);
+}
+.bar-in{max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:14px}
+.bar .nums{display:flex; flex-direction:column; gap:2px; font-variant-numeric:tabular-nums}
+.bar .nums b{font-family:var(--f-display); font-weight:800; font-size:19px; line-height:1.1; color:var(--red)}
+.bar .nums span{font-size:11.5px; color:var(--ink-soft)}
+.bar .btn{padding:13px 22px; white-space:nowrap}
+
+@media (max-width:640px){
+  .item{grid-template-columns:72px minmax(0,1fr); padding-inline:10px; row-gap:10px}
+  .item img{width:72px; height:72px}
+  .ctrl{grid-column:1/-1; flex-direction:row; align-items:center; justify-content:space-between; width:100%; min-width:0}
+  .hero .mono{width:150px; right:-18px; opacity:.16}
+    .extra .right{width:100%; grid-template-columns:auto 1fr 96px}
+  .top img.logo{width:118px}
+  .callbtn{padding:8px 10px; font-size:11px}
+  .hero{padding:26px 18px 22px}
+  .deco.tree{width:84px; top:44px; right:4px}
+  .deco.tree2{display:none}
+  .deco.gift1{width:44px; top:auto; bottom:14px; right:60px}
+  .deco.gift2{width:36px; top:auto; bottom:14px; right:14px}
+  .deco.gift3{display:none}
+  h1{max-width:9ch}
+}
+@media (prefers-reduced-motion:reduce){
+  #snow{display:none} .bulb{animation:none}
+}
+@media print{
+  #snow, .bar, .garland, .top .ghost, .cta-row, .form-card {display:none !important}
+  body{background:#fff}
+  .stepper button{display:none}
+  .stepper input{border:none; width:36px}
+  .deco{display:none}
+  .gift{background:#fff; color:#B3232F; border:2px solid #B3232F}
+  .gift p{color:#333}
+}
+</style>
+
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<div class="top">
+  <div class="wrap top-in">
+    <img class="logo" src="assets/logo.png" alt="Preparty — фуршетный кейтеринг">
+    <div class="top-r"><a class="callbtn" href="tel:+79363089744">+7 936 308-97-44</a>
+    <button class="ghost" id="snowBtn" aria-pressed="true">Снег вкл</button>
+    </div>
+  </div>
+</div>
+<div class="garland" id="garland" aria-hidden="true"></div>
+
+<div class="wrap">
+  <section class="hero">
+    <img class="mono" src="assets/monogram.png" alt="" aria-hidden="true">
+    <img class="deco tree2" src="assets/tree.svg" alt="" aria-hidden="true">
+    <img class="deco tree" src="assets/tree.svg" alt="" aria-hidden="true">
+    <img class="deco gift1" src="assets/gift-red.svg" alt="" aria-hidden="true">
+    <img class="deco gift2" src="assets/gift-green.svg" alt="" aria-hidden="true">
+    <img class="deco gift3" src="assets/gift-red.svg" alt="" aria-hidden="true">
+    <p class="eyebrow">Корпоративы 2026 / 2027</p>
+    <h1>Новогодний фуршет <em>под ключ</em></h1>
+    <p class="lead">Пример меню и сметы для вашего корпоратива: новогодние сеты, обслуживание, посуда и логистика. Меняйте количество гостей и сетов — стоимость пересчитается сразу.</p>
+
+    <div class="guests">
+      <div>
+        <div class="lab">Гостей на празднике</div>
+        <div class="stepper" style="margin-top:8px">
+          <button type="button" id="gMinus" aria-label="Меньше гостей">−</button>
+          <input id="guests" type="number" min="1" max="2000" value="25" inputmode="numeric" aria-label="Количество гостей">
+          <button type="button" id="gPlus" aria-label="Больше гостей">+</button>
+        </div>
+      </div>
+      <div class="yield">
+        Выход на гостя<br>
+        <b id="yieldFood">—</b> закусок · <b id="yieldDrink">—</b> напитков
+      </div>
+      <p class="hint">Сеты еды и напитков, официанты и столы подбираются автоматически под число гостей, чтобы выход на гостя оставался прежним. Количество можно поправить вручную ниже.</p>
+    </div>
+  </section>
+
+  <div class="block-head">
+    <h2><span id="treeIcon"></span>Новогоднее меню</h2>
+    <span id="menuCount">—</span>
+  </div>
+
+  <p class="example"><b>Это пример меню.</b> Позиции можно добавлять и заменять, а также дополнить меню горячим. Подберём под ваш формат и бюджет.</p>
+
+  <section id="menu"></section>
+
+  <section class="gift" id="gift">
+    <img class="giftimg" src="assets/ny-deserty.jpg" alt="Сет десертов New Year">
+    <div class="txt">
+      <h3>Подарок заказчику</h3>
+      <p>При заказе от 200 000 ₽ дарим сет десертов New Year, 20 шт:</p>
+      <ul class="giftlist">
+        <li>Велюровый мандариновый мусс с ежевичным кремом</li>
+        <li>Шоколадный шар с конфитюром из орехов и сусальным золотом</li>
+        <li>Чизкейк манго-маракуйя со свежими ягодами</li>
+        <li>Макаронс «Новогодняя ёлочка»</li>
+      </ul>
+      <p class="giftstate" id="giftState"></p>
+    </div>
+  </section>
+
+  <div class="block-head">
+    <h2>Обслуживание и логистика</h2>
+    <span>включается по кнопке</span>
+  </div>
+  <section id="extras"></section>
+
+  <section class="total-card">
+    <div class="row" id="giftRow" hidden><span>Подарок заказчику: сет десертов New Year, 20 шт</span><b>в подарок</b></div>
+    <div class="grand">
+      <span>Итого по предложению</span>
+      <strong id="grand">—</strong>
+    </div>
+    <div class="per">На гостя — <b id="perGuest">—</b></div>
+    <p class="valid">Стоимость актуальна до <b>конца октября 2026</b>. После этого цены могут измениться.</p>
+  </section>
+
+  <div class="cta-row">
+    <button class="btn btn-outline" id="printBtn">Распечатать смету</button>
+  </div>
+
+  <section class="contact">
+    <img class="mgr" src="assets/manager.jpg" alt="Ваш персональный менеджер Preparty">
+    <div class="mbody">
+      <p class="mlab">Ваш персональный менеджер</p>
+      <p class="mtxt">Подберём меню под ваш формат, дату и площадку и подтвердим итоговую стоимость.</p>
+      <div class="mlinks">
+        <a class="btn btn-primary" href="tel:+79363089744">+7 936 308-97-44</a>
+        <a class="btn btn-outline mail" href="mailto:rop1@preparty-catering.ru">rop1@preparty-catering.ru</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Preparty — фуршетный кейтеринг. Москва и Московская область.</p>
+    <p>Минимальный заказ 20 000 ₽. Стоимость актуальна до конца октября 2026 года, после этого цены могут измениться. Финальная стоимость подтверждается менеджером.</p>
+  </footer>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="nums">
+      <b id="barTotal">—</b>
+      <span id="barPer">—</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const MENU = [
+  { cat:"Канапе и мини-закуски", unit:"шт", items:[
+    { id:"ny-kan", ny:true, name:"Сет канапе New Year, 20 шт", price:7800, weight:560, pieces:20, qty:2, img:"assets/ny-kanape.jpg",
+      desc:"Чёрный макаронс с начинкой из белого шоколада и голубого сыра, с декором из икры тобико в золоте; домашний сыр, инжир, малина; сёмга, унаги, тобико; молекулярный мандарин с муссом из телятины" },
+    { id:"kan-party", name:"Сет канапе Party, 20 шт", price:7470, weight:530, pieces:20, qty:1, img:"assets/kanape-party.jpg",
+      desc:"Тигровая креветка с сыром филадельфия и запечённым болгарским перцем; профитроль с муссом из утки и малиновым топпингом; домашний сыр с блючиз, инжирное варенье, малина и грецкий орех; томатный панкейк с пастрами и муссом из горчицы" }
+  ]},
+  { cat:"Итальянские брускетты", unit:"шт", items:[
+    { id:"ny-brus", ny:true, name:"Сет брускетт New Year, 12 шт", price:8350, weight:600, pieces:12, qty:2, img:"assets/ny-bruschetta.jpg",
+      desc:"Подкопчённая свёкла, козий сыр, малина, виноградный тапенад; тунец с манго; утка с малиной и виноградом с крем-чизом" },
+    { id:"brus-party", name:"Сет брускетт Party, 12 шт", price:8350, weight:600, pieces:12, qty:1, img:"assets/bruschetta-party.jpg",
+      desc:"Брускетта с сёмгой собственного посола с муссом терияки; брускетта с глазированными баклажанами, итальянской страчателлой и орехом пекан на булочке бриошь; брускетта вителло тоннато" }
+  ]},
+  { cat:"Салаты", unit:"порц", items:[
+    { id:"sal-tunec", name:"Салат с тунцом, киноа и манго, 12 порц.", price:7810, weight:840, pieces:12, qty:1, img:"assets/salat-tunec.jpg",
+      desc:"Тунец татаки, спелое манго, слайс цуккини и киноа в азиатском стиле" },
+    { id:"sal-olive", name:"Оливье с говядиной и гриссини, 12 порц.", price:5780, weight:720, pieces:12, qty:1, img:"assets/salat-olive.jpg",
+      desc:"Традиционный оливье с говядиной зернового откорма, огурцами бочкового посола и гриссини" },
+    { id:"sal-garden", name:"Салат «Овощная грядка», 12 порц.", price:5780, weight:840, pieces:12, qty:1, img:"assets/salat-gryadka.jpg",
+      desc:"Лёгкий салат из свежих овощей: морковь, редис, огурец, томат и листья салата с пряным оливковым соусом" }
+  ]},
+  { cat:"Фрукты и brain-foods", unit:"порц", items:[
+    { id:"frukty", name:"Фруктово-ягодный набор Party, 12 порц.", price:8090, weight:900, pieces:12, qty:1, img:"assets/frukty.jpg",
+      desc:"Ананас, голубика, виноград, клубника, малина, мята" }
+  ]},
+  { cat:"Десерты", unit:"шт", items:[
+    { id:"ny-des", ny:true, name:"Сет десертов New Year, 20 шт", price:8550, weight:600, pieces:20, qty:2, img:"assets/ny-deserty.jpg",
+      desc:"Велюровый мандариновый мусс с ежевичным кремом; шоколадный шар с конфитюром из орехов и сусальным золотом; чизкейк манго-маракуйя со свежими ягодами; макаронс «Новогодняя ёлочка»" }
+  ]},
+  { cat:"Напитки", unit:"порц", drink:true, items:[
+    { id:"mors", name:"Морс чёрная смородина, 200 мл", price:230, weight:200, pieces:1, qty:13, img:"assets/mors.jpg",
+      desc:"Морс из чёрной смородины собственного приготовления" },
+    { id:"lim-klub", name:"Лимонад клубника-базилик, 200 мл", price:230, weight:200, pieces:1, qty:13, img:"assets/limonad-klubnika.jpg",
+      desc:"Домашний лимонад с клубникой и базиликом, подача в стеклянных диспенсерах" },
+    { id:"coffee", hot:true, name:"Кофе зерновой, американо / капучино, 150 мл", price:370, weight:150, pieces:1, qty:15, img:"assets/coffee.jpg",
+      desc:"Свежесваренный кофе из зёрен. Нужен официант на кофе-станцию" },
+    { id:"tea", hot:true, name:"Чай TEACO пакетированный, 200 мл", price:190, weight:200, pieces:1, qty:10, img:"assets/chay-kofe.jpg",
+      desc:"Пакетированный чай с сахаром и лимоном. Нужен официант на чайную станцию" }
+  ]}
+];
+
+/* Настройки автоподбора. Выход на гостя и нормы обслуживания правятся здесь. */
+const YIELD_FOOD_G = 318;      // г закусок и десертов на гостя
+const YIELD_DRINK_ML = 208;    // мл напитков на гостя
+const GUESTS_PER_WAITER = 15;  // гостей на одного официанта
+const GUESTS_PER_BUFFET = 15;   // гостей на один фуршетный стол
+const GUESTS_PER_COCKTAIL = 10; // гостей на один коктейльный стол
+const GIFT_FROM = 200000;      // сумма заказа для подарка, ₽
+
+MENU.forEach(c => c.items.forEach(i => { i.base = i.qty; i.drink = !!c.drink; }));
+
+const EXTRAS = [
+  { id:"waiters", name:"Обслуживание (официанты)", note:"Не более 6 часов. Белая рубашка, чёрный фартук с жилеткой, чёрная бабочка", price:12000, qty:2, unitLabel:"смена", on:true,
+    auto: g => Math.max(1, Math.ceil(g / GUESTS_PER_WAITER)) },
+  { id:"china",   name:"Посуда: фарфор", note:"Полный комплект на персону: тарелки, приборы, бокалы под воду и напитки, салфетки и влажные салфетки", price:580, qty:25, unitLabel:"гость", on:true,
+    auto: g => g },
+  { id:"furn",    name:"Мебель: фуршетные и коктейльные столы", price:1250, qty:6, unitLabel:"стол", on:true,
+    auto: g => Math.ceil(g / GUESTS_PER_BUFFET) + Math.ceil(g / GUESTS_PER_COCKTAIL),
+    note: q => {
+      const b = Math.round(q * 0.4), c = q - b;   // фуршетных всегда меньше: 2 к 3
+      const parts = [];
+      if (b) parts.push(`фуршетные ${b} шт`);
+      if (c) parts.push(`коктейльные ${c} шт`);
+      return (parts.length ? parts.join(", ").replace(/^./, m => m.toUpperCase()) : "Столы не нужны") + ". Чёрные или белые стрейч-чехлы";
+    } },
+  { id:"logi",    name:"Логистика", note:"Доставка оборудования, разгрузка, монтаж, демонтаж, погрузка", price:13500, qty:1, unitLabel:"выезд", on:true }
+];
+const exNote = (ex, q) => (typeof ex.note === "function" ? ex.note(q) : ex.note) + " · " + rub(ex.price) + " за " + ex.unitLabel;
+
+const rub = n => new Intl.NumberFormat("ru-RU").format(Math.round(n)) + " ₽";
+const num = n => new Intl.NumberFormat("ru-RU").format(Math.round(n));
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+
+let guests = 25;
+
+/* ===== декор: гирлянда ===== */
+(function garland(){
+  const host = $("garland");
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 1200 34");
+  svg.setAttribute("preserveAspectRatio", "none");
+  const wire = document.createElementNS(NS, "path");
+  let d = "M0 2";
+  for (let x = 0; x < 1200; x += 100) d += ` q 50 20 100 0`;
+  wire.setAttribute("d", d);
+  wire.setAttribute("fill", "none");
+  wire.setAttribute("stroke", "#1E5138");
+  wire.setAttribute("stroke-width", "2.5");
+  svg.appendChild(wire);
+  const colors = ["#B3232F", "#D7BE86", "#2E7A52", "#B3232F", "#D7BE86"];
+  for (let i = 0; i < 24; i++){
+    const x = 25 + i * 50;
+    const y = (i % 2 === 0) ? 15 : 12;
+    const b = document.createElementNS(NS, "circle");
+    b.setAttribute("cx", x); b.setAttribute("cy", y + 5); b.setAttribute("r", 5.5);
+    b.setAttribute("fill", colors[i % colors.length]);
+    b.setAttribute("stroke", "#fff"); b.setAttribute("stroke-width", "1.5");
+    b.setAttribute("class", "bulb");
+    b.style.animationDelay = (i % 6) * 0.35 + "s";
+    svg.appendChild(b);
+  }
+  host.appendChild(svg);
+})();
+
+
+/* ===== иконка ёлки ===== */
+function treeSvg(size){
+  return `<img src="assets/tree.svg" alt="" width="${size}" height="${size}" style="flex:none;display:block">`;
+}
+$("treeIcon").innerHTML = treeSvg(30);
+
+/* ===== меню ===== */
+const menuEl = $("menu");
+MENU.forEach((cat, ci) => {
+  const sec = document.createElement("section");
+  sec.className = "cat";
+  sec.innerHTML = `<div class="cat-head"><h3>${cat.cat}</h3><div class="sum" id="catsum-${ci}"></div></div>`;
+  cat.items.forEach(it => {
+    const row = document.createElement("article");
+    row.className = "item" + (it.ny ? " ny" : "");
+    row.id = "row-" + it.id;
+    row.innerHTML = `
+      <img src="${it.img}" alt="${it.name}" loading="lazy">
+      <div>
+        <h4>${it.name}${it.ny ? '<span class="nyflag">New Year</span>' : ''}</h4>
+        <p>${it.desc}</p>
+      </div>
+      <div class="ctrl">
+        <div class="stepper">
+          <button type="button" data-act="minus" data-id="${it.id}" aria-label="Убрать один">−</button>
+          <input type="number" min="0" max="999" value="${it.qty}" data-id="${it.id}" aria-label="Количество: ${it.name}">
+          <button type="button" data-act="plus" data-id="${it.id}" aria-label="Добавить один">+</button>
+        </div>
+        <div class="sum">
+          <div class="meta" id="meta-${it.id}"></div>
+          <div class="price" id="price-${it.id}"></div>
+          <div class="unit">${rub(it.price)} за ${cat.drink ? "порцию" : "сет"}</div>
+        </div>
+      </div>`;
+    sec.appendChild(row);
+  });
+  menuEl.appendChild(sec);
+});
+
+/* ===== доп. услуги ===== */
+const extrasEl = $("extras");
+EXTRAS.forEach(ex => {
+  const row = document.createElement("article");
+  row.className = "extra";
+  row.id = "ex-" + ex.id;
+  row.innerHTML = `
+    <div class="txt"><h4>${ex.name}</h4><p id="exn-${ex.id}"></p></div>
+    <div class="right">
+      <div class="stepper">
+        <button type="button" data-exact="minus" data-id="${ex.id}" aria-label="Меньше">−</button>
+        <input type="number" min="0" max="9999" value="${ex.qty}" data-exid="${ex.id}" aria-label="Количество: ${ex.name}">
+        <button type="button" data-exact="plus" data-id="${ex.id}" aria-label="Больше">+</button>
+      </div>
+      <div class="price" id="exp-${ex.id}"></div>
+      <button class="toggle" type="button" data-extoggle="${ex.id}" aria-pressed="${ex.on}">${ex.on ? "включено" : "выключено"}</button>
+    </div>`;
+  extrasEl.appendChild(row);
+});
+
+/* ===== пересчёт ===== */
+function recalc(){
+  let food = 0, drink = 0, foodWeight = 0, drinkVol = 0, pieces = 0;
+
+  MENU.forEach((cat, ci) => {
+    let catPieces = 0, catWeight = 0;
+    cat.items.forEach(it => {
+      const line = it.price * it.qty;
+      const w = it.weight * it.qty;
+      if (cat.drink){ drink += line; drinkVol += w; }
+      else { food += line; foodWeight += w; pieces += it.pieces * it.qty; }
+      catPieces += it.pieces * it.qty;
+      catWeight += w;
+      $("price-" + it.id).textContent = rub(line);
+      $("meta-" + it.id).textContent = cat.drink
+        ? `${num(w)} мл`
+        : `${num(w)} г · ${it.pieces * it.qty} ${cat.unit}`;
+      $("row-" + it.id).classList.toggle("off", it.qty === 0);
+    });
+    $("catsum-" + ci).textContent = cat.drink
+      ? `${num(catWeight)} мл всего`
+      : `${catPieces} ${cat.unit} · ${num(catWeight)} г`;
+  });
+
+  let extra = 0;
+  EXTRAS.forEach(ex => {
+    const line = ex.on ? ex.price * ex.qty : 0;
+    extra += line;
+    $("exp-" + ex.id).textContent = rub(line);
+    $("exn-" + ex.id).textContent = exNote(ex, ex.qty);
+    $("ex-" + ex.id).classList.toggle("off", !ex.on);
+  });
+
+  const total = food + drink + extra;
+  $("grand").textContent = rub(total);
+  $("perGuest").textContent = rub(total / Math.max(guests, 1));
+  $("barTotal").textContent = rub(total);
+  $("barPer").textContent = rub(total / Math.max(guests, 1)) + " на гостя · " + guests + " гостей";
+  $("yieldFood").textContent = num(foodWeight / Math.max(guests, 1)) + " г";
+  $("yieldDrink").textContent = num(drinkVol / Math.max(guests, 1)) + " мл";
+  const giftOn = total >= GIFT_FROM;
+  $("gift").classList.toggle("on", giftOn);
+  $("giftRow").hidden = !giftOn;
+  $("giftState").textContent = giftOn
+    ? "Подарок ваш: сет десертов New Year добавлен к заказу."
+    : `До подарка осталось ${rub(GIFT_FROM - total)}.`;
+  $("menuCount").textContent = `${pieces} шт закусок и десертов`;
+}
+
+function findItem(id){
+  for (const c of MENU) for (const i of c.items) if (i.id === id) return i;
+  return null;
+}
+
+/* ===== события ===== */
+menuEl.addEventListener("click", e => {
+  const b = e.target.closest("button[data-act]");
+  if (!b) return;
+  const it = findItem(b.dataset.id);
+  it.qty = Math.max(0, it.qty + (b.dataset.act === "plus" ? 1 : -1));
+  menuEl.querySelector(`input[data-id="${it.id}"]`).value = it.qty;
+  recalc();
+});
+menuEl.addEventListener("input", e => {
+  if (!e.target.dataset.id) return;
+  const it = findItem(e.target.dataset.id);
+  const v = parseInt(e.target.value, 10);
+  it.qty = isNaN(v) || v < 0 ? 0 : Math.min(v, 999);
+  recalc();
+});
+
+extrasEl.addEventListener("click", e => {
+  const t = e.target.closest("button[data-extoggle]");
+  if (t){
+    const ex = EXTRAS.find(x => x.id === t.dataset.extoggle);
+    ex.on = !ex.on;
+    t.setAttribute("aria-pressed", ex.on);
+    t.textContent = ex.on ? "включено" : "выключено";
+    recalc();
+    return;
+  }
+  const b = e.target.closest("button[data-exact]");
+  if (!b) return;
+  const ex = EXTRAS.find(x => x.id === b.dataset.id);
+  ex.qty = Math.max(0, ex.qty + (b.dataset.exact === "plus" ? 1 : -1));
+  extrasEl.querySelector(`input[data-exid="${ex.id}"]`).value = ex.qty;
+  recalc();
+});
+extrasEl.addEventListener("input", e => {
+  if (!e.target.dataset.exid) return;
+  const ex = EXTRAS.find(x => x.id === e.target.dataset.exid);
+  const v = parseInt(e.target.value, 10);
+  ex.qty = isNaN(v) || v < 0 ? 0 : Math.min(v, 9999);
+  recalc();
+});
+
+/* подбор сетов под число гостей: сохраняем состав меню и выход на гостя */
+function fitSets(items, target){
+  const baseW = items.reduce((a, i) => a + i.weight * i.base, 0);
+  if (!baseW) return;
+  const k = target / baseW;
+  items.forEach(i => { i.frac = i.base * k - Math.floor(i.base * k); i.qty = Math.floor(i.base * k); });
+  let total = items.reduce((a, i) => a + i.weight * i.qty, 0);
+  [...items].filter(i => i.base).sort((a, b) => b.frac - a.frac).forEach(i => {
+    if (Math.abs(target - (total + i.weight)) < Math.abs(target - total)){ i.qty++; total += i.weight; }
+  });
+}
+function applyGuests(){
+  const all = MENU.flatMap(c => c.items);
+  fitSets(all.filter(i => !i.drink), YIELD_FOOD_G * guests);
+  fitSets(all.filter(i => i.drink && !i.hot), YIELD_DRINK_ML * guests);
+  all.forEach(i => { menuEl.querySelector(`input[data-id="${i.id}"]`).value = i.qty; });
+  EXTRAS.forEach(ex => {
+    if (ex.auto) ex.qty = ex.auto(guests);
+    extrasEl.querySelector(`input[data-exid="${ex.id}"]`).value = ex.qty;
+  });
+  recalc();
+}
+
+const guestsInput = $("guests");
+function setGuests(v){
+  guests = Math.min(Math.max(1, v), 2000);
+  guestsInput.value = guests;
+  applyGuests();
+}
+guestsInput.addEventListener("input", () => {
+  const v = parseInt(guestsInput.value, 10);
+  if (!isNaN(v) && v >= 1){ guests = Math.min(v, 2000); applyGuests(); }
+});
+$("gMinus").addEventListener("click", () => setGuests(guests - 1));
+$("gPlus").addEventListener("click", () => setGuests(guests + 1));
+
+$("printBtn").addEventListener("click", () => window.print());
+
+
+recalc();
+
+/* ===== снег ===== */
+const cv = $("snow"), ctx = cv.getContext("2d");
+let flakes = [], raf = null, snowOn = true;
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function sizeCanvas(){
+  const d = window.devicePixelRatio || 1;
+  cv.width = innerWidth * d; cv.height = innerHeight * d;
+  ctx.setTransform(d, 0, 0, d, 0, 0);
+}
+function makeFlakes(){
+  const n = Math.min(110, Math.round(innerWidth / 11));
+  flakes = Array.from({ length:n }, () => ({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    r: 2 + Math.random() * 5,
+    sp: .3 + Math.random() * .9,
+    dr: (Math.random() - .5) * .5,
+    ph: Math.random() * Math.PI * 2,
+    rot: Math.random() * Math.PI,
+    vr: (Math.random() - .5) * .014,
+    star: Math.random() < .55,
+    col: ["rgba(30,81,56,.55)","rgba(30,81,56,.55)","rgba(179,35,47,.5)","rgba(176,158,122,.75)","rgba(104,152,186,.6)"][Math.floor(Math.random()*5)]
+  }));
+}
+function drawStar(f){
+  ctx.save();
+  ctx.translate(f.x, f.y);
+  ctx.rotate(f.rot);
+  ctx.strokeStyle = f.col;
+  ctx.lineWidth = Math.max(1, f.r * .3);
+  ctx.lineCap = "round";
+  for (let i = 0; i < 3; i++){
+    ctx.beginPath();
+    ctx.moveTo(-f.r, 0); ctx.lineTo(f.r, 0);
+    ctx.stroke();
+    ctx.rotate(Math.PI / 3);
+  }
+  ctx.restore();
+}
+function draw(){
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  for (const f of flakes){
+    f.y += f.sp;
+    f.ph += .012;
+    f.rot += f.vr;
+    f.x += Math.sin(f.ph) * .55 + f.dr * .3;
+    if (f.y > innerHeight + 8){ f.y = -10; f.x = Math.random() * innerWidth; }
+    if (f.x < -10) f.x = innerWidth + 8;
+    if (f.x > innerWidth + 10) f.x = -8;
+    if (f.star){ drawStar(f); }
+    else {
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r * .55, 0, Math.PI * 2);
+      ctx.fillStyle = f.col;
+      ctx.fill();
+    }
+  }
+  raf = requestAnimationFrame(draw);
+}
+function startSnow(){ if (!raf) draw(); }
+function stopSnow(){ if (raf){ cancelAnimationFrame(raf); raf = null; } ctx.clearRect(0, 0, innerWidth, innerHeight); }
+
+sizeCanvas(); makeFlakes();
+if (reduced){ snowOn = false; $("snowBtn").setAttribute("aria-pressed","false"); $("snowBtn").textContent = "Снег выкл"; }
+else startSnow();
+
+addEventListener("resize", () => { sizeCanvas(); makeFlakes(); });
+$("snowBtn").addEventListener("click", () => {
+  snowOn = !snowOn;
+  $("snowBtn").setAttribute("aria-pressed", snowOn);
+  $("snowBtn").textContent = snowOn ? "Снег вкл" : "Снег выкл";
+  snowOn ? startSnow() : stopSnow();
+});
+</script>
+
+</body>
+</html>
