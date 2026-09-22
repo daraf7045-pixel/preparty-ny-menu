@@ -480,7 +480,7 @@ const EXTRAS = [
       if (c) parts.push(`коктейльные ${c} шт`);
       return (parts.length ? parts.join(", ").replace(/^./, m => m.toUpperCase()) : "Столы не нужны") + ". Чёрные стрейч-чехлы";
     } },
-  { id:"logi",    name:"Логистика", note:"Доставка оборудования, разгрузка, монтаж, демонтаж, погрузка", price:13500, qty:1, unitLabel:"выезд", on:true }
+  { id:"logi",    name:"Логистика", note:"Доставка оборудования, разгрузка, монтаж, демонтаж, погрузка (при увеличении количества гостей сумма логистики рассчитывается индивидуально менеджером)", price:13500, qty:1, unitLabel:"выезд", on:true }
 ];
 const exNote = (ex, q) => (typeof ex.note === "function" ? ex.note(q) : ex.note) + " · " + rub(ex.price) + " за " + ex.unitLabel;
 
