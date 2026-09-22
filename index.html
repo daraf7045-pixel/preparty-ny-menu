@@ -467,9 +467,9 @@ const GIFT_FROM = 200000;      // сумма заказа для подарка,
 MENU.forEach(c => c.items.forEach(i => { i.base = i.qty; i.drink = !!c.drink; }));
 
 const EXTRAS = [
-  { id:"waiters", name:"Обслуживание (официанты)", note:"Не более 6 часов. Белая рубашка, чёрный фартук с жилеткой, чёрная бабочка", price:12000, qty:2, unitLabel:"смена", on:true,
+  { id:"waiters", name:"Обслуживание (официанты)", note:"Не более 6 часов. Белая рубашка, чёрный фартук с жилеткой, чёрная бабочка", price:12000, qty:2, unitLabel:"смену", on:true,
     auto: g => Math.max(1, Math.ceil(g / GUESTS_PER_WAITER)) },
-  { id:"china",   name:"Посуда: фарфор", note:"Полный комплект на персону: тарелки, приборы, бокалы под воду и напитки, салфетки и влажные салфетки", price:580, qty:25, unitLabel:"гость", on:true,
+  { id:"china",   name:"Посуда: фарфор", note:"Полный комплект на персону: тарелки, приборы, бокалы под воду и напитки, салфетки и влажные салфетки", price:580, qty:25, unitLabel:"гостя", on:true,
     auto: g => g },
   { id:"furn",    name:"Мебель: фуршетные и коктейльные столы", price:1250, qty:6, unitLabel:"стол", on:true,
     auto: g => Math.ceil(g / GUESTS_PER_BUFFET) + Math.ceil(g / GUESTS_PER_COCKTAIL),
