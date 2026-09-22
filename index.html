@@ -59,7 +59,6 @@ body{
   border-bottom:3px solid transparent;
   border-image:linear-gradient(90deg, var(--red) 0 33%, var(--gold-bright) 33% 66%, var(--green) 66% 100%) 1;
 }
-.top-r{display:flex; align-items:center; gap:10px}
 .top-in{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:12px}
 .top img.logo{width:150px; height:auto; display:block}
 .ghost{
@@ -260,11 +259,6 @@ h1 .spark{color:var(--red)}
 .contact .mlinks{display:flex; flex-wrap:wrap; gap:10px}
 a.btn.mail{text-transform:none; letter-spacing:.02em; font-size:13px}
 a.btn{display:inline-block; text-decoration:none; text-align:center; font-size:12px; letter-spacing:.08em}
-.callbtn{
-  font:700 12px/1 var(--f-body); letter-spacing:.06em; text-decoration:none; color:var(--red);
-  border:1.5px solid var(--red); border-radius:999px; padding:9px 14px; white-space:nowrap; font-variant-numeric:tabular-nums;
-}
-.callbtn:hover{background:var(--red); color:#fff}
 footer{margin:44px 0 120px; padding-top:24px; border-top:2px dotted var(--gold); color:var(--ink-soft); font-size:12.5px}
 footer p{margin:0 0 6px}
 
@@ -288,7 +282,6 @@ footer p{margin:0 0 6px}
   .hero .mono{width:150px; right:-18px; opacity:.16}
     .extra .right{width:100%; grid-template-columns:auto 1fr 96px}
   .top img.logo{width:118px}
-  .callbtn{padding:8px 10px; font-size:11px}
   .hero{padding:26px 18px 22px}
   .deco.tree{width:84px; top:44px; right:4px}
   .deco.tree2{display:none}
@@ -316,9 +309,7 @@ footer p{margin:0 0 6px}
 <div class="top">
   <div class="wrap top-in">
     <img class="logo" src="assets/logo.png" alt="Preparty — фуршетный кейтеринг">
-    <div class="top-r"><a class="callbtn" href="tel:+79363089744">+7 936 308-97-44</a>
     <button class="ghost" id="snowBtn" aria-pressed="true">Снег вкл</button>
-    </div>
   </div>
 </div>
 <div class="garland" id="garland" aria-hidden="true"></div>
@@ -469,8 +460,8 @@ const MENU = [
 const YIELD_FOOD_G = 318;      // г закусок и десертов на гостя
 const YIELD_DRINK_ML = 208;    // мл напитков на гостя
 const GUESTS_PER_WAITER = 15;  // гостей на одного официанта
-const GUESTS_PER_BUFFET = 15;   // гостей на один фуршетный стол
-const GUESTS_PER_COCKTAIL = 10; // гостей на один коктейльный стол
+const GUESTS_PER_BUFFET = 20;   // гостей на один фуршетный стол
+const GUESTS_PER_COCKTAIL = 15; // гостей на один коктейльный стол
 const GIFT_FROM = 200000;      // сумма заказа для подарка, ₽
 
 MENU.forEach(c => c.items.forEach(i => { i.base = i.qty; i.drink = !!c.drink; }));
@@ -482,12 +473,12 @@ const EXTRAS = [
     auto: g => g },
   { id:"furn",    name:"Мебель: фуршетные и коктейльные столы", price:1250, qty:6, unitLabel:"стол", on:true,
     auto: g => Math.ceil(g / GUESTS_PER_BUFFET) + Math.ceil(g / GUESTS_PER_COCKTAIL),
-    note: q => {
-      const b = Math.round(q * 0.4), c = q - b;   // фуршетных всегда меньше: 2 к 3
+    note: () => {
+      const b = Math.ceil(guests / GUESTS_PER_BUFFET), c = Math.ceil(guests / GUESTS_PER_COCKTAIL);
       const parts = [];
       if (b) parts.push(`фуршетные ${b} шт`);
       if (c) parts.push(`коктейльные ${c} шт`);
-      return (parts.length ? parts.join(", ").replace(/^./, m => m.toUpperCase()) : "Столы не нужны") + ". Чёрные или белые стрейч-чехлы";
+      return (parts.length ? parts.join(", ").replace(/^./, m => m.toUpperCase()) : "Столы не нужны") + ". Чёрные стрейч-чехлы";
     } },
   { id:"logi",    name:"Логистика", note:"Доставка оборудования, разгрузка, монтаж, демонтаж, погрузка", price:13500, qty:1, unitLabel:"выезд", on:true }
 ];
