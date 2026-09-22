@@ -276,22 +276,22 @@ footer p{margin:0 0 6px}
 .bar .btn{padding:13px 22px; white-space:nowrap}
 
 .santa-walk{
-  position:absolute; left:0; bottom:100%; width:52px; margin-bottom:-14px;
+  position:absolute; left:0; bottom:100%; width:104px; margin-bottom:-28px;
   pointer-events:none; z-index:1;
   animation:santaWalkAcross 120s linear infinite;
 }
 .santa-walk img{display:block; width:100%; animation:santaBob .55s ease-in-out infinite}
 @keyframes santaWalkAcross{
-  0%{transform:translateX(-70px)}
-  6%{transform:translateX(calc(100vw + 70px))}
-  100%{transform:translateX(calc(100vw + 70px))}
+  0%{transform:translateX(-140px)}
+  24%{transform:translateX(calc(100vw + 140px))}
+  100%{transform:translateX(calc(100vw + 140px))}
 }
 @keyframes santaBob{
   0%,100%{transform:translateY(0) rotate(-2deg)}
   50%{transform:translateY(-4px) rotate(2deg)}
 }
 @media (max-width:640px){
-  .santa-walk{width:42px}
+  .santa-walk{width:84px; margin-bottom:-22px}
 }
 @media (prefers-reduced-motion:reduce){
   .santa-walk{display:none}
@@ -468,20 +468,20 @@ const MENU = [
       desc:"Велюровый мандариновый мусс с ежевичным кремом; шоколадный шар с конфитюром из орехов и сусальным золотом; чизкейк манго-маракуйя со свежими ягодами; макаронс «Новогодняя ёлочка»" }
   ]},
   { cat:"Напитки", unit:"порц", drink:true, items:[
-    { id:"mors", name:"Морс чёрная смородина, 200 мл", price:230, weight:200, pieces:1, qty:13, img:"assets/mors.jpg",
+    { id:"mors", name:"Морс чёрная смородина, 200 мл", price:230, weight:200, pieces:1, qty:15, img:"assets/mors.jpg",
       desc:"Морс из чёрной смородины собственного приготовления" },
-    { id:"lim-klub", name:"Лимонад клубника-базилик, 200 мл", price:230, weight:200, pieces:1, qty:13, img:"assets/limonad-klubnika.jpg",
+    { id:"lim-klub", name:"Лимонад клубника-базилик, 200 мл", price:230, weight:200, pieces:1, qty:10, img:"assets/limonad-klubnika.jpg",
       desc:"Домашний лимонад с клубникой и базиликом, подача в стеклянных диспенсерах" },
-    { id:"coffee", hot:true, name:"Кофе зерновой, американо / капучино, 150 мл", price:370, weight:150, pieces:1, qty:15, img:"assets/coffee.jpg",
+    { id:"coffee", name:"Кофе зерновой, американо / капучино, 150 мл", price:370, weight:150, pieces:1, qty:15, img:"assets/coffee.jpg",
       desc:"Свежесваренный кофе из зёрен. Нужен официант на кофе-станцию" },
-    { id:"tea", hot:true, name:"Чай TEACO пакетированный, 200 мл", price:190, weight:200, pieces:1, qty:10, img:"assets/chay-kofe.jpg",
+    { id:"tea", name:"Чай TEACO пакетированный, 200 мл", price:190, weight:200, pieces:1, qty:10, img:"assets/chay-kofe.jpg",
       desc:"Пакетированный чай с сахаром и лимоном. Нужен официант на чайную станцию" }
   ]}
 ];
 
 /* Настройки автоподбора. Выход на гостя и нормы обслуживания правятся здесь. */
 const YIELD_FOOD_G = 318;      // г закусок и десертов на гостя
-const YIELD_DRINK_ML = 208;    // мл напитков на гостя
+const YIELD_DRINK_ML = 370;    // мл напитков на гостя (морс, лимонад, кофе, чай вместе)
 const GUESTS_PER_WAITER = 15;  // гостей на одного официанта
 const GUESTS_PER_BUFFET = 20;   // гостей на один фуршетный стол
 const GUESTS_PER_COCKTAIL = 15; // гостей на один коктейльный стол
@@ -713,7 +713,7 @@ function fitSets(items, target){
 function applyGuests(){
   const all = MENU.flatMap(c => c.items);
   fitSets(all.filter(i => !i.drink), YIELD_FOOD_G * guests);
-  fitSets(all.filter(i => i.drink && !i.hot), YIELD_DRINK_ML * guests);
+  fitSets(all.filter(i => i.drink), YIELD_DRINK_ML * guests);
   all.forEach(i => { menuEl.querySelector(`input[data-id="${i.id}"]`).value = i.qty; });
   EXTRAS.forEach(ex => {
     if (ex.auto) ex.qty = ex.auto(guests);
