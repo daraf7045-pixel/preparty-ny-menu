@@ -89,15 +89,6 @@ body{
 .deco{position:absolute; pointer-events:none; z-index:0}
 .deco.tree{right:6px; top:58px; width:168px; filter:drop-shadow(0 10px 14px rgba(30,81,56,.22))}
 .deco.tree2{right:150px; top:118px; width:96px; filter:drop-shadow(0 8px 12px rgba(30,81,56,.18))}
-.deco.santa{
-  right:118px; top:148px; width:50px; transform-origin:70% 55%;
-  animation:santaPeek 15s ease-in-out infinite;
-}
-@keyframes santaPeek{
-  0%,72%{transform:translateX(0) rotate(-4deg)}
-  80%,90%{transform:translateX(-24px) rotate(4deg)}
-  100%{transform:translateX(0) rotate(-4deg)}
-}
 .deco.gift1{right:118px; top:250px; width:74px; transform:rotate(-6deg); filter:drop-shadow(0 6px 10px rgba(36,36,36,.18))}
 .deco.gift2{right:6px; top:266px; width:58px; transform:rotate(7deg); filter:drop-shadow(0 6px 10px rgba(36,36,36,.18))}
 .deco.gift3{right:66px; top:286px; width:44px; filter:drop-shadow(0 5px 8px rgba(36,36,36,.16))}
@@ -284,6 +275,28 @@ footer p{margin:0 0 6px}
 .bar .nums span{font-size:11.5px; color:var(--ink-soft)}
 .bar .btn{padding:13px 22px; white-space:nowrap}
 
+.santa-walk{
+  position:absolute; left:0; bottom:100%; width:52px; margin-bottom:-14px;
+  pointer-events:none; z-index:1;
+  animation:santaWalkAcross 120s linear infinite;
+}
+.santa-walk img{display:block; width:100%; animation:santaBob .55s ease-in-out infinite}
+@keyframes santaWalkAcross{
+  0%{transform:translateX(-70px)}
+  6%{transform:translateX(calc(100vw + 70px))}
+  100%{transform:translateX(calc(100vw + 70px))}
+}
+@keyframes santaBob{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-4px) rotate(2deg)}
+}
+@media (max-width:640px){
+  .santa-walk{width:42px}
+}
+@media (prefers-reduced-motion:reduce){
+  .santa-walk{display:none}
+}
+
 @media (max-width:640px){
   .item{grid-template-columns:72px minmax(0,1fr); padding-inline:10px; row-gap:10px}
   .item img{width:72px; height:72px}
@@ -297,11 +310,10 @@ footer p{margin:0 0 6px}
   .deco.gift1{width:44px; top:auto; bottom:14px; right:60px}
   .deco.gift2{width:36px; top:auto; bottom:14px; right:14px}
   .deco.gift3{display:none}
-  .deco.santa{display:none}
   h1{max-width:9ch}
 }
 @media (prefers-reduced-motion:reduce){
-  #snow{display:none} .bulb{animation:none} .deco.santa{animation:none}
+  #snow{display:none} .bulb{animation:none}
 }
 @media print{
   #snow, .bar, .garland, .top .ghost, .cta-row, .form-card {display:none !important}
@@ -327,7 +339,6 @@ footer p{margin:0 0 6px}
 <div class="wrap">
   <section class="hero">
     <img class="mono" src="assets/monogram.png" alt="" aria-hidden="true">
-    <img class="deco santa" src="assets/santa.svg" alt="" aria-hidden="true">
     <img class="deco tree2" src="assets/tree.svg" alt="" aria-hidden="true">
     <img class="deco tree" src="assets/tree.svg" alt="" aria-hidden="true">
     <img class="deco gift1" src="assets/gift-red.svg" alt="" aria-hidden="true">
@@ -417,6 +428,7 @@ footer p{margin:0 0 6px}
 </div>
 
 <div class="bar">
+  <div class="santa-walk" aria-hidden="true"><img src="assets/santa-walk.svg" alt=""></div>
   <div class="bar-in">
     <div class="nums">
       <b id="barTotal">—</b>
